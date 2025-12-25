@@ -209,7 +209,7 @@ function renderChart(clicksHistory) {
     const maxValue = Math.max(...data.map(d => d.count), 1);
 
     // Рисуем оси
-    ctx.strokeStyle = '#374151';
+    ctx.strokeStyle = '#d1d5db';
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(padding, padding);
@@ -219,7 +219,7 @@ function renderChart(clicksHistory) {
 
     // Рисуем график
     if (data.length > 0) {
-        ctx.strokeStyle = '#3b82f6';
+        ctx.strokeStyle = '#1f2937';
         ctx.lineWidth = 2;
         ctx.beginPath();
 
@@ -237,7 +237,7 @@ function renderChart(clicksHistory) {
         ctx.stroke();
 
         // Заливка под графиком
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.1)';
+        ctx.fillStyle = 'rgba(31, 41, 55, 0.1)';
         ctx.lineTo(width - padding, height - padding);
         ctx.lineTo(padding, height - padding);
         ctx.closePath();
@@ -245,7 +245,7 @@ function renderChart(clicksHistory) {
     }
 
     // Подписи осей
-    ctx.fillStyle = '#9ca3af';
+    ctx.fillStyle = '#6b7280';
     ctx.font = '12px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('0', padding - 20, height - padding + 5);
@@ -257,11 +257,11 @@ function renderABTests(variants) {
     if (!container) return;
 
     if (variants.length === 0) {
-        container.innerHTML = '<p class="text-gray-400 text-sm">A/B тесты не настроены. Оригинальный URL будет использоваться для всех переходов.</p>';
+        container.innerHTML = '<p class="text-gray-600 text-sm">A/B тесты не настроены. Оригинальный URL будет использоваться для всех переходов.</p>';
         return;
     }
 
-    container.innerHTML = variants.map((variant, index) => createABTestVariantHTML(variant, index)).join('');
+    container.innerHTML = variants.map((variant, index) => createABTestVariantHTML(variant, index, variants.length)).join('');
 
     // Добавляем обработчики удаления
     variants.forEach((variant, index) => {
@@ -272,19 +272,19 @@ function renderABTests(variants) {
     });
 }
 
-function createABTestVariantHTML(variant, index) {
+function createABTestVariantHTML(variant, index, totalVariants) {
     return `
-        <div class="bg-gray-800/50 rounded-lg p-4">
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
             <div class="flex items-start justify-between mb-3">
                 <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-300 mb-2">URL варианта ${index + 1}</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">URL варианта ${index + 1}</label>
                     <input 
                         type="url" 
                         id="ab-url-${index}" 
                         value="${escapeHtml(variant.url)}"
-                        class="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white mb-3"
+                        class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900 mb-3"
                     >
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Вес (%)</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Вес (%)</label>
                     <input 
                         type="number" 
                         id="ab-weight-${index}" 
@@ -292,13 +292,13 @@ function createABTestVariantHTML(variant, index) {
                         min="0"
                         max="100"
                         step="0.1"
-                        class="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                        class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900"
                     >
                 </div>
-                ${variants.length > 1 ? `
+                ${totalVariants > 1 ? `
                     <button 
                         id="delete-ab-${index}"
-                        class="ml-4 px-3 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium transition-colors"
+                        class="ml-4 px-3 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium text-white transition-colors"
                     >
                         Удалить
                     </button>
@@ -360,7 +360,7 @@ async function generateQRCode() {
 
 function showError(message) {
     const loadingState = document.getElementById('loadingState');
-    loadingState.innerHTML = `<div class="text-red-400">${escapeHtml(message)}</div>`;
+    loadingState.innerHTML = `<div class="text-red-600">${escapeHtml(message)}</div>`;
 }
 
 function escapeHtml(text) {

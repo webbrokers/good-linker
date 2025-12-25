@@ -7,17 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-950 text-gray-100 min-h-screen">
-    <nav class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+<body class="bg-white text-gray-900 min-h-screen">
+    <nav class="border-b border-gray-200 bg-white">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                <a href="index.html" class="text-2xl font-semibold text-gray-900">
                     Good Linker
                 </a>
-                <div class="flex gap-4">
-                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Создать ссылку</a>
-                    <a href="links.html" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Все ссылки</a>
-                    <a href="settings.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Настройки</a>
+                <div class="flex gap-2">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-900 bg-gray-100 hover:bg-gray-100 transition-colors font-medium">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Настройки</a>
                 </div>
             </div>
         </div>
@@ -26,12 +26,12 @@
     <main class="container mx-auto px-4 py-12 max-w-7xl">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                <h1 class="text-3xl font-semibold mb-2 text-gray-900">
                     Все ссылки
                 </h1>
-                <p class="text-gray-400">Управляйте всеми вашими сокращенными ссылками</p>
+                <p class="text-gray-600">Управляйте всеми вашими сокращенными ссылками</p>
             </div>
-            <a href="index.html" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold text-white transition-all transform hover:scale-105">
+            <a href="index.html" class="px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
                 + Создать ссылку
             </a>
         </div>
@@ -42,16 +42,16 @@
                     type="text" 
                     id="searchInput"
                     placeholder="Поиск по ссылкам..."
-                    class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-500"
+                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900 placeholder-gray-400"
                 >
             </div>
-            <select id="sortSelect" class="px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+            <select id="sortSelect" class="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
                 <option value="date-desc">Дата: новые сначала</option>
                 <option value="date-asc">Дата: старые сначала</option>
                 <option value="clicks-desc">Клики: больше всего</option>
                 <option value="clicks-asc">Клики: меньше всего</option>
             </select>
-            <select id="filterSelect" class="px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+            <select id="filterSelect" class="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
                 <option value="all">Все статусы</option>
                 <option value="active">Только активные</option>
                 <option value="inactive">Только неактивные</option>
@@ -71,7 +71,7 @@
                 </svg>
                 <p class="text-xl mb-2">У вас еще нет ссылок</p>
                 <p class="text-gray-600 mb-6">Создайте вашу первую короткую ссылку</p>
-                <a href="index.html" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold text-white transition-all">
+                <a href="index.html" class="inline-block px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
                     Создать ссылку
                 </a>
             </div>

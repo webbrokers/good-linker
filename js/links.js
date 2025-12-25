@@ -122,37 +122,37 @@ function createLinkCard(link) {
     });
 
     const statusBadge = link.isActive 
-        ? '<span class="px-2 py-1 bg-green-900/30 text-green-400 rounded text-xs font-medium">Активна</span>'
-        : '<span class="px-2 py-1 bg-gray-800 text-gray-400 rounded text-xs font-medium">Неактивна</span>';
+        ? '<span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">Активна</span>'
+        : '<span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-medium">Неактивна</span>';
 
     return `
-        <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 hover:border-gray-700 transition-colors">
+        <div class="bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 transition-colors card-shadow">
             <div class="flex items-start justify-between mb-4">
                 <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
-                        <h3 class="text-lg font-semibold text-white">${escapeHtml(link.shortCode)}</h3>
+                        <h3 class="text-lg font-semibold text-gray-900">${escapeHtml(link.shortCode)}</h3>
                         ${statusBadge}
                     </div>
-                    <p class="text-sm text-gray-400 truncate mb-2">${escapeHtml(link.originalUrl)}</p>
+                    <p class="text-sm text-gray-600 truncate mb-2">${escapeHtml(link.originalUrl)}</p>
                     <p class="text-xs text-gray-500">Создано: ${createdDate}</p>
                 </div>
                 <label class="relative inline-flex items-center cursor-pointer ml-4">
                     <input type="checkbox" id="toggle-${link.id}" ${link.isActive ? 'checked' : ''} class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gray-900"></div>
                 </label>
             </div>
-            <div class="flex items-center justify-between pt-4 border-t border-gray-800">
+            <div class="flex items-center justify-between pt-4 border-t border-gray-200">
                 <div class="flex gap-6 text-sm">
                     <div>
-                        <span class="text-gray-400">Всего кликов:</span>
-                        <span class="text-white font-semibold ml-2">${totalClicks}</span>
+                        <span class="text-gray-600">Всего кликов:</span>
+                        <span class="text-gray-900 font-semibold ml-2">${totalClicks}</span>
                     </div>
                     <div>
-                        <span class="text-gray-400">За 24ч:</span>
-                        <span class="text-white font-semibold ml-2">${clicks24h}</span>
+                        <span class="text-gray-600">За 24ч:</span>
+                        <span class="text-gray-900 font-semibold ml-2">${clicks24h}</span>
                     </div>
                 </div>
-                <a href="link.html?id=${link.id}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors">
+                <a href="link.html?id=${link.id}" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors">
                     Детали
                 </a>
             </div>
