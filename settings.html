@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки - Good Linker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+    <nav class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Good Linker
+                </a>
+                <div class="flex gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Настройки</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-4xl">
+        <h1 class="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            Настройки
+        </h1>
+
+        <div class="space-y-6">
+            <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Кастомный домен</h2>
+                <p class="text-gray-400 mb-4 text-sm">
+                    Укажите ваш собственный домен для коротких ссылок. В MVP версии это настройка только для отображения. 
+                    Реальная интеграция DNS будет доступна в будущих версиях.
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="customDomain" class="block text-sm font-medium text-gray-300 mb-2">
+                            Домен
+                        </label>
+                        <input 
+                            type="text" 
+                            id="customDomain" 
+                            placeholder="my-link.com"
+                            class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-500"
+                        >
+                        <p class="mt-1 text-xs text-gray-500">Введите домен без протокола (http/https)</p>
+                    </div>
+                    <button id="saveDomainBtn" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold text-white transition-all">
+                        Сохранить домен
+                    </button>
+                </div>
+                <div id="domainList" class="mt-6 space-y-2">
+                    <!-- Сохраненные домены будут отображаться здесь -->
+                </div>
+            </div>
+
+            <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                <h2 class="text-2xl font-bold mb-4">Данные</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div>
+                            <div class="font-semibold">Экспорт данных</div>
+                            <div class="text-sm text-gray-400">Скачайте все ваши ссылки в формате JSON</div>
+                        </div>
+                        <button id="exportBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors">
+                            Экспортировать
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                        <div>
+                            <div class="font-semibold">Импорт данных</div>
+                            <div class="text-sm text-gray-400">Загрузите ссылки из JSON файла</div>
+                        </div>
+                        <label class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-medium transition-colors cursor-pointer">
+                            Импортировать
+                            <input type="file" id="importFile" accept=".json" class="hidden">
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-red-900/20 border border-red-800 rounded-lg">
+                        <div>
+                            <div class="font-semibold text-red-400">Очистить все данные</div>
+                            <div class="text-sm text-red-300">Это действие нельзя отменить</div>
+                        </div>
+                        <button id="clearAllBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium transition-colors">
+                            Очистить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="js/core/storage.js"></script>
+    <script type="module" src="js/settings.js"></script>
+</body>
+</html>
+

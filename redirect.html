@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправление...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen flex items-center justify-center">
+    <div class="text-center">
+        <div class="mb-4">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+        <p class="text-lg text-gray-400">Перенаправление...</p>
+        <p id="errorMessage" class="hidden mt-4 text-red-400"></p>
+    </div>
+
+    <script type="module" src="js/core/storage.js"></script>
+    <script type="module" src="js/core/redirect-engine.js"></script>
+    <script type="module" src="js/core/stats-tracker.js"></script>
+    <script type="module" src="js/core/ab-test-engine.js"></script>
+    <script type="module" src="js/redirect.js"></script>
+</body>
+</html>
+
