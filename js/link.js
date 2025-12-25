@@ -10,6 +10,7 @@ import { getUtmParamsFromForm, fillUtmForm, addUtmToUrl } from './utils/utm-buil
 import { validateAndNormalizeUrl } from './utils/url-validator.js';
 
 let currentLink = null;
+let currentClicksHistory = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Получаем ID из URL параметров
@@ -30,6 +31,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('qrCodeContainer')?.scrollIntoView({ behavior: 'smooth' });
         }, 500);
     }
+
+    // Слушатель изменения темы для перерисовки графика
+    const observer = new MutationObserver(() => {
+        if (currentClicksHistory.length > 0) {
+            renderChart(currentClicksHistory);
+        }
+    });
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
 });
 
 async function loadLink(id) {
@@ -83,7 +95,8 @@ async function renderLink() {
     document.getElementById('clicks24h').textContent = stats.clicks24h || 0;
 
     // График кликов
-    renderChart(stats.clicksHistory || []);
+    currentClicksHistory = stats.clicksHistory || [];
+    renderChart(currentClicksHistory);
 
     // A/B тесты
     renderABTests(currentLink.abTests || []);
@@ -208,8 +221,15 @@ function renderChart(clicksHistory) {
     // Находим максимум для масштабирования
     const maxValue = Math.max(...data.map(d => d.count), 1);
 
+    // Определяем цвета в зависимости от темы
+    const isDark = document.documentElement.classList.contains('dark');
+    const axisColor = isDark ? '#475569' : '#d1d5db';
+    const lineColor = isDark ? '#cbd5e1' : '#1f2937';
+    const fillColor = isDark ? 'rgba(203, 213, 225, 0.1)' : 'rgba(31, 41, 55, 0.1)';
+    const textColor = isDark ? '#94a3b8' : '#6b7280';
+
     // Рисуем оси
-    ctx.strokeStyle = '#d1d5db';
+    ctx.strokeStyle = axisColor;
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(padding, padding);
@@ -219,7 +239,7 @@ function renderChart(clicksHistory) {
 
     // Рисуем график
     if (data.length > 0) {
-        ctx.strokeStyle = '#1f2937';
+        ctx.strokeStyle = lineColor;
         ctx.lineWidth = 2;
         ctx.beginPath();
 
@@ -237,7 +257,7 @@ function renderChart(clicksHistory) {
         ctx.stroke();
 
         // Заливка под графиком
-        ctx.fillStyle = 'rgba(31, 41, 55, 0.1)';
+        ctx.fillStyle = fillColor;
         ctx.lineTo(width - padding, height - padding);
         ctx.lineTo(padding, height - padding);
         ctx.closePath();
@@ -245,7 +265,7 @@ function renderChart(clicksHistory) {
     }
 
     // Подписи осей
-    ctx.fillStyle = '#6b7280';
+    ctx.fillStyle = textColor;
     ctx.font = '12px sans-serif';
     ctx.textAlign = 'center';
     ctx.fillText('0', padding - 20, height - padding + 5);
@@ -257,7 +277,7 @@ function renderABTests(variants) {
     if (!container) return;
 
     if (variants.length === 0) {
-        container.innerHTML = '<p class="text-gray-600 text-sm">A/B тесты не настроены. Оригинальный URL будет использоваться для всех переходов.</p>';
+        container.innerHTML = '<p class="text-gray-600 dark:text-slate-300 text-sm">A/B тесты не настроены. Оригинальный URL будет использоваться для всех переходов.</p>';
         return;
     }
 
@@ -274,17 +294,17 @@ function renderABTests(variants) {
 
 function createABTestVariantHTML(variant, index, totalVariants) {
     return `
-        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <div class="bg-gray-50 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-600">
             <div class="flex items-start justify-between mb-3">
                 <div class="flex-1">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">URL варианта ${index + 1}</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">URL варианта ${index + 1}</label>
                     <input 
                         type="url" 
                         id="ab-url-${index}" 
                         value="${escapeHtml(variant.url)}"
-                        class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900 mb-3"
+                        class="w-full px-4 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 mb-3 transition-colors"
                     >
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Вес (%)</label>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">Вес (%)</label>
                     <input 
                         type="number" 
                         id="ab-weight-${index}" 
@@ -292,7 +312,7 @@ function createABTestVariantHTML(variant, index, totalVariants) {
                         min="0"
                         max="100"
                         step="0.1"
-                        class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900"
+                        class="w-full px-4 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors"
                     >
                 </div>
                 ${totalVariants > 1 ? `

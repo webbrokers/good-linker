@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Перенаправление...</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-white text-gray-900 min-h-screen flex items-center justify-center">
+<body class="bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 min-h-screen flex items-center justify-center transition-colors">
     <div class="text-center">
         <div class="mb-4">
-            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 dark:border-slate-400"></div>
         </div>
-        <p class="text-lg text-gray-600">Перенаправление...</p>
-        <p id="errorMessage" class="hidden mt-4 text-red-600"></p>
+        <p class="text-lg text-gray-600 dark:text-slate-300">Перенаправление...</p>
+        <p id="errorMessage" class="hidden mt-4 text-red-600 dark:text-red-400"></p>
     </div>
 
+    <script type="module" src="js/utils/theme-manager.js"></script>
     <script type="module" src="js/core/storage.js"></script>
     <script type="module" src="js/core/redirect-engine.js"></script>
     <script type="module" src="js/core/stats-tracker.js"></script>

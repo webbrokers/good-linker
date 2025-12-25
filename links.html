@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Все ссылки - Good Linker</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-white text-gray-900 min-h-screen">
-    <nav class="border-b border-gray-200 bg-white">
+<body class="bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 min-h-screen transition-colors">
+    <nav class="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-semibold text-gray-900">
+                <a href="index.html" class="text-2xl font-semibold text-gray-900 dark:text-slate-100">
                     Good Linker
                 </a>
-                <div class="flex gap-2">
-                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Создать ссылку</a>
-                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-900 bg-gray-100 hover:bg-gray-100 transition-colors font-medium">Все ссылки</a>
-                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Настройки</a>
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-900 dark:text-slate-100 bg-gray-100 dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors font-medium">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Настройки</a>
+                    <button id="themeToggle" class="ml-2 p-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" aria-label="Переключить тему">
+                        <svg id="themeIconSun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="themeIconMoon" class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -26,12 +39,12 @@
     <main class="container mx-auto px-4 py-12 max-w-7xl">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-3xl font-semibold mb-2 text-gray-900">
+                <h1 class="text-3xl font-semibold mb-2 text-gray-900 dark:text-slate-100">
                     Все ссылки
                 </h1>
-                <p class="text-gray-600">Управляйте всеми вашими сокращенными ссылками</p>
+                <p class="text-gray-600 dark:text-slate-300">Управляйте всеми вашими сокращенными ссылками</p>
             </div>
-            <a href="index.html" class="px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
+            <a href="index.html" class="px-6 py-3 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg font-medium text-white transition-colors">
                 + Создать ссылку
             </a>
         </div>
@@ -42,16 +55,16 @@
                     type="text" 
                     id="searchInput"
                     placeholder="Поиск по ссылкам..."
-                    class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900 placeholder-gray-400"
+                    class="w-full px-4 py-3 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 transition-colors"
                 >
             </div>
-            <select id="sortSelect" class="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+            <select id="sortSelect" class="px-4 py-3 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                 <option value="date-desc">Дата: новые сначала</option>
                 <option value="date-asc">Дата: старые сначала</option>
                 <option value="clicks-desc">Клики: больше всего</option>
                 <option value="clicks-asc">Клики: меньше всего</option>
             </select>
-            <select id="filterSelect" class="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+            <select id="filterSelect" class="px-4 py-3 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                 <option value="all">Все статусы</option>
                 <option value="active">Только активные</option>
                 <option value="inactive">Только неактивные</option>
@@ -59,29 +72,36 @@
         </div>
 
         <div id="linksContainer" class="space-y-4">
-            <div class="text-center py-12 text-gray-500">
+            <div class="text-center py-12 text-gray-500 dark:text-slate-400">
                 <p>Загрузка ссылок...</p>
             </div>
         </div>
 
         <div id="emptyState" class="hidden text-center py-12">
-            <div class="text-gray-500 mb-4">
+            <div class="text-gray-500 dark:text-slate-400 mb-4">
                 <svg class="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                 </svg>
                 <p class="text-xl mb-2">У вас еще нет ссылок</p>
-                <p class="text-gray-600 mb-6">Создайте вашу первую короткую ссылку</p>
-                <a href="index.html" class="inline-block px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
+                <p class="text-gray-600 dark:text-slate-300 mb-6">Создайте вашу первую короткую ссылку</p>
+                <a href="index.html" class="inline-block px-6 py-3 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg font-medium text-white transition-colors">
                     Создать ссылку
                 </a>
             </div>
         </div>
     </main>
 
+    <script type="module" src="js/utils/theme-manager.js"></script>
     <script type="module" src="js/core/storage.js"></script>
     <script type="module" src="js/core/link-service.js"></script>
     <script type="module" src="js/core/stats-tracker.js"></script>
     <script type="module" src="js/links.js"></script>
+    <script type="module">
+        import themeManager from './js/utils/theme-manager.js';
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            themeManager.toggleTheme();
+        });
+    </script>
 </body>
 </html>
 

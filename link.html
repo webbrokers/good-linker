@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Детали ссылки - Good Linker</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-white text-gray-900 min-h-screen">
-    <nav class="border-b border-gray-200 bg-white">
+<body class="bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 min-h-screen transition-colors">
+    <nav class="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-semibold text-gray-900">
+                <a href="index.html" class="text-2xl font-semibold text-gray-900 dark:text-slate-100">
                     Good Linker
                 </a>
-                <div class="flex gap-2">
-                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Создать ссылку</a>
-                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Все ссылки</a>
-                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Настройки</a>
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Настройки</a>
+                    <button id="themeToggle" class="ml-2 p-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" aria-label="Переключить тему">
+                        <svg id="themeIconSun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="themeIconMoon" class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -25,7 +38,7 @@
 
     <main class="container mx-auto px-4 py-12 max-w-6xl">
         <div class="mb-6">
-            <a href="links.html" class="text-blue-600 hover:text-blue-700 inline-flex items-center gap-2 mb-4 font-medium">
+            <a href="links.html" class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-2 mb-4 font-medium transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
@@ -33,21 +46,21 @@
             </a>
         </div>
 
-        <div id="loadingState" class="text-center py-12 text-gray-600">
+        <div id="loadingState" class="text-center py-12 text-gray-600 dark:text-slate-400">
             <p>Загрузка...</p>
         </div>
 
         <div id="linkContent" class="hidden">
             <div class="mb-8">
                 <div class="flex items-center justify-between mb-4">
-                    <h1 class="text-3xl font-semibold text-gray-900">
+                    <h1 class="text-3xl font-semibold text-gray-900 dark:text-slate-100">
                         Детали ссылки
                     </h1>
                     <div class="flex gap-3">
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="toggleActive" class="sr-only peer">
-                            <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-gray-900"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-700" id="statusText">Неактивна</span>
+                            <div class="w-14 h-7 bg-gray-200 dark:bg-slate-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-gray-300 dark:peer-focus:ring-slate-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-gray-900 dark:peer-checked:bg-slate-500"></div>
+                            <span class="ml-3 text-sm font-medium text-gray-700 dark:text-slate-200" id="statusText">Неактивна</span>
                         </label>
                         <button id="deleteBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium text-white transition-colors">
                             Удалить
@@ -55,31 +68,31 @@
                     </div>
                 </div>
 
-                <div class="bg-white border border-gray-200 rounded-xl p-6 mb-6 card-shadow-lg">
+                <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 mb-6 card-shadow-lg transition-colors">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Короткая ссылка</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">Короткая ссылка</label>
                         <div class="flex items-center gap-3">
                             <input 
                                 type="text" 
                                 id="shortLinkDisplay" 
                                 readonly="readonly"
-                                class="flex-1 px-4 py-2 bg-white border border-gray-300 rounded-lg text-blue-600 font-mono"
+                                class="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg text-blue-600 dark:text-blue-400 font-mono transition-colors"
                             >
-                            <button id="copyShortBtn" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors">
+                            <button id="copyShortBtn" class="px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-white transition-colors">
                                 Копировать
                             </button>
-                            <a id="testLink" href="#" target="_blank" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium text-gray-700 transition-colors">
+                            <a id="testLink" href="#" target="_blank" class="px-4 py-2 bg-gray-100 dark:bg-slate-600 hover:bg-gray-200 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-gray-700 dark:text-slate-200 transition-colors">
                                 Открыть
                             </a>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Оригинальный URL</label>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">Оригинальный URL</label>
                         <input 
                             type="url" 
                             id="originalUrlInput" 
-                            class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900"
+                            class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors"
                         >
                     </div>
                 </div>
@@ -87,95 +100,95 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
-                        <h2 class="text-2xl font-semibold mb-6 text-gray-900">Статистика</h2>
+                    <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
+                        <h2 class="text-2xl font-semibold mb-6 text-gray-900 dark:text-slate-100">Статистика</h2>
                         <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                                <div class="text-sm text-gray-600 mb-1">Всего кликов</div>
-                                <div class="text-3xl font-semibold text-gray-900" id="totalClicks">0</div>
+                            <div class="bg-gray-50 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-600">
+                                <div class="text-sm text-gray-600 dark:text-slate-300 mb-1">Всего кликов</div>
+                                <div class="text-3xl font-semibold text-gray-900 dark:text-slate-100" id="totalClicks">0</div>
                             </div>
-                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                                <div class="text-sm text-gray-600 mb-1">За последние 24 часа</div>
-                                <div class="text-3xl font-semibold text-gray-900" id="clicks24h">0</div>
+                            <div class="bg-gray-50 dark:bg-slate-800 rounded-lg p-4 border border-gray-200 dark:border-slate-600">
+                                <div class="text-sm text-gray-600 dark:text-slate-300 mb-1">За последние 24 часа</div>
+                                <div class="text-3xl font-semibold text-gray-900 dark:text-slate-100" id="clicks24h">0</div>
                             </div>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold mb-4 text-gray-900">График кликов</h3>
+                            <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-slate-100">График кликов</h3>
                             <canvas id="clicksChart" class="w-full h-64"></canvas>
                         </div>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
+                    <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
                         <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-semibold text-gray-900">UTM метки</h2>
-                            <button id="saveUtmBtn" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors">
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-slate-100">UTM метки</h2>
+                            <button id="saveUtmBtn" class="px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-white transition-colors">
                                 Сохранить
                             </button>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">utm_source</label>
-                                <input type="text" id="edit_utm_source" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">utm_source</label>
+                                <input type="text" id="edit_utm_source" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">utm_medium</label>
-                                <input type="text" id="edit_utm_medium" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">utm_medium</label>
+                                <input type="text" id="edit_utm_medium" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">utm_campaign</label>
-                                <input type="text" id="edit_utm_campaign" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">utm_campaign</label>
+                                <input type="text" id="edit_utm_campaign" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">utm_term</label>
-                                <input type="text" id="edit_utm_term" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">utm_term</label>
+                                <input type="text" id="edit_utm_term" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">utm_content</label>
-                                <input type="text" id="edit_utm_content" class="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900">
+                                <label class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">utm_content</label>
+                                <input type="text" id="edit_utm_content" class="w-full px-4 py-2 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 transition-colors">
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
+                    <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
                         <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-2xl font-semibold text-gray-900">A/B тестирование</h2>
-                            <button id="addAbVariantBtn" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors">
+                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-slate-100">A/B тестирование</h2>
+                            <button id="addAbVariantBtn" class="px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-white transition-colors">
                                 + Добавить вариант
                             </button>
                         </div>
                         <div id="abTestsContainer" class="space-y-4">
                             <!-- A/B варианты будут добавлены динамически -->
                         </div>
-                        <div id="abTestInfo" class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
+                        <div id="abTestInfo" class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-sm text-blue-800 dark:text-blue-300">
                             <strong>Примечание:</strong> Проценты должны в сумме давать 100%. Если A/B тесты настроены, оригинальный URL игнорируется.
                         </div>
-                        <button id="saveAbBtn" class="mt-4 w-full px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
+                        <button id="saveAbBtn" class="mt-4 w-full px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg font-medium text-white transition-colors">
                             Сохранить A/B тесты
                         </button>
                     </div>
                 </div>
 
                 <div class="space-y-6">
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
-                        <h2 class="text-2xl font-semibold mb-4 text-gray-900">QR код</h2>
+                    <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
+                        <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-slate-100">QR код</h2>
                         <div id="qrCodeContainer" class="flex justify-center mb-4">
-                            <canvas id="qrCanvas" class="bg-white p-4 rounded-lg border border-gray-200"></canvas>
+                            <canvas id="qrCanvas" class="bg-white p-4 rounded-lg border border-gray-200 dark:border-slate-600"></canvas>
                         </div>
-                        <button id="downloadQrBtn" class="w-full px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
+                        <button id="downloadQrBtn" class="w-full px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg font-medium text-white transition-colors">
                             Скачать QR код
                         </button>
                     </div>
 
-                    <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
-                        <h3 class="text-lg font-semibold mb-4 text-gray-900">Информация</h3>
+                    <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
+                        <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-slate-100">Информация</h3>
                         <div class="space-y-3 text-sm">
                             <div>
-                                <div class="text-gray-600">Дата создания</div>
-                                <div class="text-gray-900 font-medium" id="createdAt">-</div>
+                                <div class="text-gray-600 dark:text-slate-300">Дата создания</div>
+                                <div class="text-gray-900 dark:text-slate-100 font-medium" id="createdAt">-</div>
                             </div>
                             <div>
-                                <div class="text-gray-600">Код</div>
-                                <div class="text-gray-900 font-mono" id="linkCode">-</div>
+                                <div class="text-gray-600 dark:text-slate-300">Код</div>
+                                <div class="text-gray-900 dark:text-slate-100 font-mono" id="linkCode">-</div>
                             </div>
                         </div>
                     </div>
@@ -185,6 +198,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script type="module" src="js/utils/theme-manager.js"></script>
     <script type="module" src="js/core/storage.js"></script>
     <script type="module" src="js/utils/utm-builder.js"></script>
     <script type="module" src="js/core/link-service.js"></script>
@@ -192,6 +206,12 @@
     <script type="module" src="js/core/ab-test-engine.js"></script>
     <script type="module" src="js/core/qr-generator.js"></script>
     <script type="module" src="js/link.js"></script>
+    <script type="module">
+        import themeManager from './js/utils/theme-manager.js';
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            themeManager.toggleTheme();
+        });
+    </script>
 </body>
 </html>
 

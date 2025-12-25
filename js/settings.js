@@ -118,8 +118,8 @@ function renderDomainList(domains) {
     }
 
     container.innerHTML = domains.map(domain => `
-        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
-            <span class="text-gray-900 font-mono">${escapeHtml(domain)}</span>
+        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-600">
+            <span class="text-gray-900 dark:text-slate-100 font-mono">${escapeHtml(domain)}</span>
             <button 
                 class="px-3 py-1 bg-red-600 hover:bg-red-700 rounded text-sm font-medium text-white transition-colors delete-domain-btn"
                 data-domain="${escapeHtml(domain)}"

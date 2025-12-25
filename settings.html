@@ -5,50 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Настройки - Good Linker</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-white text-gray-900 min-h-screen">
-    <nav class="border-b border-gray-200 bg-white">
+<body class="bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 min-h-screen transition-colors">
+    <nav class="border-b border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-colors">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <a href="index.html" class="text-2xl font-semibold text-gray-900">
+                <a href="index.html" class="text-2xl font-semibold text-gray-900 dark:text-slate-100">
                     Good Linker
                 </a>
-                <div class="flex gap-2">
-                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Создать ссылку</a>
-                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">Все ссылки</a>
-                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-900 bg-gray-100 hover:bg-gray-100 transition-colors font-medium">Настройки</a>
+                <div class="flex items-center gap-2">
+                    <a href="index.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg text-gray-900 dark:text-slate-100 bg-gray-100 dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors font-medium">Настройки</a>
+                    <button id="themeToggle" class="ml-2 p-2 rounded-lg text-gray-700 dark:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors" aria-label="Переключить тему">
+                        <svg id="themeIconSun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="themeIconMoon" class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
     </nav>
 
     <main class="container mx-auto px-4 py-12 max-w-4xl">
-        <h1 class="text-3xl font-semibold mb-8 text-gray-900">
+        <h1 class="text-3xl font-semibold mb-8 text-gray-900 dark:text-slate-100">
             Настройки
         </h1>
 
         <div class="space-y-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Кастомный домен</h2>
-                <p class="text-gray-600 mb-4 text-sm">
+            <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-slate-100">Кастомный домен</h2>
+                <p class="text-gray-600 dark:text-slate-300 mb-4 text-sm">
                     Укажите ваш собственный домен для коротких ссылок. В MVP версии это настройка только для отображения. 
                     Реальная интеграция DNS будет доступна в будущих версиях.
                 </p>
                 <div class="space-y-4">
                     <div>
-                        <label for="customDomain" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="customDomain" class="block text-sm font-medium text-gray-700 dark:text-slate-200 mb-2">
                             Домен
                         </label>
                         <input 
                             type="text" 
                             id="customDomain" 
                             placeholder="my-link.com"
-                            class="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none text-gray-900 placeholder-gray-400"
+                            class="w-full px-4 py-3 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg focus:outline-none text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 transition-colors"
                         >
-                        <p class="mt-1 text-xs text-gray-500">Введите домен без протокола (http/https)</p>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">Введите домен без протокола (http/https)</p>
                     </div>
-                    <button id="saveDomainBtn" class="px-6 py-3 bg-gray-900 hover:bg-gray-800 rounded-lg font-medium text-white transition-colors">
+                    <button id="saveDomainBtn" class="px-6 py-3 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg font-medium text-white transition-colors">
                         Сохранить домен
                     </button>
                 </div>
@@ -57,32 +70,32 @@
                 </div>
             </div>
 
-            <div class="bg-white border border-gray-200 rounded-xl p-6 card-shadow-lg">
-                <h2 class="text-2xl font-semibold mb-4 text-gray-900">Данные</h2>
+            <div class="bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl p-6 card-shadow-lg transition-colors">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-900 dark:text-slate-100">Данные</h2>
                 <div class="space-y-4">
-                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-600">
                         <div>
-                            <div class="font-semibold text-gray-900">Экспорт данных</div>
-                            <div class="text-sm text-gray-600">Скачайте все ваши ссылки в формате JSON</div>
+                            <div class="font-semibold text-gray-900 dark:text-slate-100">Экспорт данных</div>
+                            <div class="text-sm text-gray-600 dark:text-slate-300">Скачайте все ваши ссылки в формате JSON</div>
                         </div>
-                        <button id="exportBtn" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors">
+                        <button id="exportBtn" class="px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-white transition-colors">
                             Экспортировать
                         </button>
                     </div>
-                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-600">
                         <div>
-                            <div class="font-semibold text-gray-900">Импорт данных</div>
-                            <div class="text-sm text-gray-600">Загрузите ссылки из JSON файла</div>
+                            <div class="font-semibold text-gray-900 dark:text-slate-100">Импорт данных</div>
+                            <div class="text-sm text-gray-600 dark:text-slate-300">Загрузите ссылки из JSON файла</div>
                         </div>
-                        <label class="px-4 py-2 bg-gray-900 hover:bg-gray-800 rounded-lg text-sm font-medium text-white transition-colors cursor-pointer">
+                        <label class="px-4 py-2 bg-gray-900 dark:bg-slate-600 hover:bg-gray-800 dark:hover:bg-slate-500 rounded-lg text-sm font-medium text-white transition-colors cursor-pointer">
                             Импортировать
                             <input type="file" id="importFile" accept=".json" class="hidden">
                         </label>
                     </div>
-                    <div class="flex items-center justify-between p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                         <div>
-                            <div class="font-semibold text-red-700">Очистить все данные</div>
-                            <div class="text-sm text-red-600">Это действие нельзя отменить</div>
+                            <div class="font-semibold text-red-700 dark:text-red-400">Очистить все данные</div>
+                            <div class="text-sm text-red-600 dark:text-red-300">Это действие нельзя отменить</div>
                         </div>
                         <button id="clearAllBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium text-white transition-colors">
                             Очистить
@@ -93,8 +106,15 @@
         </div>
     </main>
 
+    <script type="module" src="js/utils/theme-manager.js"></script>
     <script type="module" src="js/core/storage.js"></script>
     <script type="module" src="js/settings.js"></script>
+    <script type="module">
+        import themeManager from './js/utils/theme-manager.js';
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            themeManager.toggleTheme();
+        });
+    </script>
 </body>
 </html>
 
