@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все ссылки - Good Linker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+    <nav class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Good Linker
+                </a>
+                <div class="flex gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 transition-colors">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Настройки</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-7xl">
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Все ссылки
+                </h1>
+                <p class="text-gray-400">Управляйте всеми вашими сокращенными ссылками</p>
+            </div>
+            <a href="index.html" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold text-white transition-all transform hover:scale-105">
+                + Создать ссылку
+            </a>
+        </div>
+
+        <div class="mb-6 flex flex-col md:flex-row gap-4">
+            <div class="flex-1">
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Поиск по ссылкам..."
+                    class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-500"
+                >
+            </div>
+            <select id="sortSelect" class="px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                <option value="date-desc">Дата: новые сначала</option>
+                <option value="date-asc">Дата: старые сначала</option>
+                <option value="clicks-desc">Клики: больше всего</option>
+                <option value="clicks-asc">Клики: меньше всего</option>
+            </select>
+            <select id="filterSelect" class="px-4 py-3 bg-gray-900 border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                <option value="all">Все статусы</option>
+                <option value="active">Только активные</option>
+                <option value="inactive">Только неактивные</option>
+            </select>
+        </div>
+
+        <div id="linksContainer" class="space-y-4">
+            <div class="text-center py-12 text-gray-500">
+                <p>Загрузка ссылок...</p>
+            </div>
+        </div>
+
+        <div id="emptyState" class="hidden text-center py-12">
+            <div class="text-gray-500 mb-4">
+                <svg class="w-24 h-24 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                </svg>
+                <p class="text-xl mb-2">У вас еще нет ссылок</p>
+                <p class="text-gray-600 mb-6">Создайте вашу первую короткую ссылку</p>
+                <a href="index.html" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 rounded-lg font-semibold text-white transition-all">
+                    Создать ссылку
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="js/core/storage.js"></script>
+    <script type="module" src="js/core/link-service.js"></script>
+    <script type="module" src="js/core/stats-tracker.js"></script>
+    <script type="module" src="js/links.js"></script>
+</body>
+</html>
+

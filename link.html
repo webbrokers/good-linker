@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали ссылки - Good Linker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+    <nav class="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Good Linker
+                </a>
+                <div class="flex gap-4">
+                    <a href="index.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Создать ссылку</a>
+                    <a href="links.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Все ссылки</a>
+                    <a href="settings.html" class="px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">Настройки</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12 max-w-6xl">
+        <div class="mb-6">
+            <a href="links.html" class="text-blue-400 hover:text-blue-300 inline-flex items-center gap-2 mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Назад к списку ссылок
+            </a>
+        </div>
+
+        <div id="loadingState" class="text-center py-12 text-gray-500">
+            <p>Загрузка...</p>
+        </div>
+
+        <div id="linkContent" class="hidden">
+            <div class="mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                        Детали ссылки
+                    </h1>
+                    <div class="flex gap-3">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="toggleActive" class="sr-only peer">
+                            <div class="w-14 h-7 bg-gray-700 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-blue-600"></div>
+                            <span class="ml-3 text-sm font-medium text-gray-300" id="statusText">Неактивна</span>
+                        </label>
+                        <button id="deleteBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm font-medium transition-colors">
+                            Удалить
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 mb-6">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Короткая ссылка</label>
+                        <div class="flex items-center gap-3">
+                            <input 
+                                type="text" 
+                                id="shortLinkDisplay" 
+                                readonly
+                                class="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-blue-400 font-mono"
+                            >
+                            <button id="copyShortBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors">
+                                Копировать
+                            </button>
+                            <a id="testLink" href="#" target="_blank" class="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg text-sm font-medium transition-colors">
+                                Открыть
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Оригинальный URL</label>
+                        <input 
+                            type="url" 
+                            id="originalUrlInput" 
+                            class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                        >
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                        <h2 class="text-2xl font-bold mb-6">Статистика</h2>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-gray-800/50 rounded-lg p-4">
+                                <div class="text-sm text-gray-400 mb-1">Всего кликов</div>
+                                <div class="text-3xl font-bold" id="totalClicks">0</div>
+                            </div>
+                            <div class="bg-gray-800/50 rounded-lg p-4">
+                                <div class="text-sm text-gray-400 mb-1">За последние 24 часа</div>
+                                <div class="text-3xl font-bold" id="clicks24h">0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">График кликов</h3>
+                            <canvas id="clicksChart" class="w-full h-64"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold">UTM метки</h2>
+                            <button id="saveUtmBtn" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors">
+                                Сохранить
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">utm_source</label>
+                                <input type="text" id="edit_utm_source" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">utm_medium</label>
+                                <input type="text" id="edit_utm_medium" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">utm_campaign</label>
+                                <input type="text" id="edit_utm_campaign" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">utm_term</label>
+                                <input type="text" id="edit_utm_term" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-2">utm_content</label>
+                                <input type="text" id="edit_utm_content" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold">A/B тестирование</h2>
+                            <button id="addAbVariantBtn" class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm font-medium transition-colors">
+                                + Добавить вариант
+                            </button>
+                        </div>
+                        <div id="abTestsContainer" class="space-y-4">
+                            <!-- A/B варианты будут добавлены динамически -->
+                        </div>
+                        <div id="abTestInfo" class="mt-4 p-4 bg-blue-900/20 border border-blue-800 rounded-lg text-sm text-blue-300">
+                            <strong>Примечание:</strong> Проценты должны в сумме давать 100%. Если A/B тесты настроены, оригинальный URL игнорируется.
+                        </div>
+                        <button id="saveAbBtn" class="mt-4 w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors">
+                            Сохранить A/B тесты
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                        <h2 class="text-2xl font-bold mb-4">QR код</h2>
+                        <div id="qrCodeContainer" class="flex justify-center mb-4">
+                            <canvas id="qrCanvas" class="bg-white p-4 rounded-lg"></canvas>
+                        </div>
+                        <button id="downloadQrBtn" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-colors">
+                            Скачать QR код
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6">
+                        <h3 class="text-lg font-semibold mb-4">Информация</h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <div class="text-gray-400">Дата создания</div>
+                                <div class="text-white font-medium" id="createdAt">-</div>
+                            </div>
+                            <div>
+                                <div class="text-gray-400">Код</div>
+                                <div class="text-white font-mono" id="linkCode">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script type="module" src="js/core/storage.js"></script>
+    <script type="module" src="js/utils/utm-builder.js"></script>
+    <script type="module" src="js/core/link-service.js"></script>
+    <script type="module" src="js/core/stats-tracker.js"></script>
+    <script type="module" src="js/core/ab-test-engine.js"></script>
+    <script type="module" src="js/core/qr-generator.js"></script>
+    <script type="module" src="js/link.js"></script>
+</body>
+</html>
+
