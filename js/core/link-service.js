@@ -153,9 +153,18 @@ export class LinkService {
      */
     async getShortUrl(link) {
         const settings = await storage.getSettings();
-        const domain = link.customDomain || settings.defaultDomain || window.location.hostname;
-        const protocol = window.location.protocol;
-        return `${protocol}//${domain}/redirect.html?code=${link.shortCode}`;
+        
+        if (link.customDomain) {
+            // Если используется кастомный домен, используем его
+            const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+            return `${protocol}//${link.customDomain}/redirect.html?code=${link.shortCode}`;
+        }
+        
+        // Используем текущий origin для корректной работы на GitHub Pages
+        const origin = window.location.origin;
+        const basePath = window.location.pathname.split('/').slice(0, -1).filter(p => p).join('/');
+        const path = basePath ? `/${basePath}/redirect.html` : '/redirect.html';
+        return `${origin}${path}?code=${link.shortCode}`;
     }
 }
 
